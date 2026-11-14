@@ -92,5 +92,9 @@
       chk('k-name', v => v.length > 1, 'Please enter your name.'); chk('k-email', valid.email, 'Enter a valid email address.'); chk('k-phone', valid.phone, 'Enter a valid phone number.'); chk('k-svc', v => v !== '', 'Choose a service.');
       const m = $('#k-msg'); m.classList.add('show'); m.textContent = ok ? 'Thank you, ' + $('#k-name').value.trim().split(' ')[0] + '. Your free consultation is booked. A compliance expert will call you within one working day.' : 'Please fix the highlighted fields.';
     });
+    const cmp = $('#cmp');
+    if (cmp) cmp.addEventListener('click', e => { const b = e.target.closest('.cmp-leg button'); if (!b) return; const on = b.getAttribute('aria-pressed') !== 'true';
+      $$('.cmp-leg button', cmp).forEach(x => x.setAttribute('aria-pressed', x === b && on ? 'true' : 'false'));
+      cmp.classList.toggle('f', on); $$('.b', cmp).forEach(r => r.classList.toggle('hi', on && r.dataset.e === b.dataset.e)); });
   });
 })();
